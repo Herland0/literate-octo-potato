@@ -31,14 +31,13 @@ def service_connection(key, mask):
             data.outb = data.outb[sent:]
 
 
-HOST = "127.0.0.1"
-PORT = 65430
+host, port = sys.argv[1], int(sys.argv[2])
 
 lsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM) #defying socket
-lsock.bind((HOST,PORT)) 
+lsock.bind((host,port)) 
 lsock.listen()
 
-print(f"Listening on {(HOST, PORT)}")
+print(f"Listening on {(host,port)}")
 
 lsock.setblocking(False) #socket in non blocking mode 
 sel.register(lsock, selectors.EVENT_READ, data = None) #registers socket to be monitored with select - listening socket selectors.EVENT_READ
