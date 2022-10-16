@@ -5,7 +5,6 @@ host = "127.0.0.1"
 port = 1234
 
 def client_handler(connection):
-    connection.send(str.encode('You are now connected to the replay server...'))
     while True:
         data = connection.recv(2048)
         message = data.decode('utf-8')

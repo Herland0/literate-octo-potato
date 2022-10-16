@@ -9,7 +9,6 @@ try:
 except socket.error as e:
     print(str(e))
 
-Response = ClientSocket.recv(2048)
 while True:
     message = input('Your message: ')
     ClientSocket.send(str.encode(message))
