@@ -1,19 +1,16 @@
 import socket
 from _thread import *
 
+
 host = "127.0.0.1"
 port = 1234
 clients = []
-nicknames = []
+
 
 def client_handler(connection):
     while True:
         data = connection.recv(2048)
         message = data.decode('utf-8')
-        #if message == 'BYE':
-        #     break
-        #reply = f"Server: {message}"
-        #connection.sendall(str.encode(reply))
         reply = f"Server: {message}"
         if message == "Bye":
             break
@@ -31,11 +28,6 @@ def accept_connections(ServerSocket):
     print(f'Connected to: {address[0]}:{str(address[1])}')
 
     clients.append(Client)
-    nickname = Client.recv(1024)
-    nicknames.append(nickname.decode('utf-8'))
-    nick_message = f"Nickname set to: {nickname}".encode('utf-8')
-    Client.send(nick_message)
-
     start_new_thread(client_handler, (Client,))
 
 def start_server(host, port):
